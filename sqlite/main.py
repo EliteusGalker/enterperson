@@ -3,11 +3,16 @@ import sqlite3
 from tkinter import ttk
 from tkinter import messagebox
 
+#Colors
+blackColor = "#050505"  
+whiteColor = "#feffff"   
+tealColor = "#008080"  
+
 def enterData():
     #User Info
     firstName = firstNameEntry.get()
     lastName = LastNameEntry.get()
-    title = titleCombobox.get()
+    email = emailEntry.get()
     age = ageSpinbox.get()
     nationality = nationalityCombobox.get()
     
@@ -20,24 +25,29 @@ def enterData():
             #Database
             conn = sqlite3.connect('data.db')
             
-            tableCreateQuery = '''CREATE TABLE IF NOT EXISTS Student_Data(firstname TEXT, lastname TEXT, title TEXT, age INT, nationality TEXT, registration_status TEXT, num_courses INT, num_semesters INT)'''
+            tableCreateQuery = '''CREATE TABLE IF NOT EXISTS Student_Data(firstname TEXT, lastname TEXT, email TEXT, age INT, nationality TEXT, registration_status TEXT, num_courses INT, num_semesters INT)'''
             
             conn.execute(tableCreateQuery)
             
-            dataInsertQuery = '''INSERT INTO Student_Data(firstname, lastname, title, age, nationality, registration_status, num_courses, num_semesters) VALUES (?,?,?,?,?,?,?,?)'''
-            dataInsertTuple = (firstName, lastName, title, age, nationality, registrationStatus, numCourses, numSemesters)
+            dataInsertQuery = '''INSERT INTO Student_Data(firstname, lastname, email, age, nationality, registration_status, num_courses, num_semesters) VALUES (?,?,?,?,?,?,?,?)'''
+            dataInsertTuple = (firstName, lastName, email, age, nationality, registrationStatus, numCourses, numSemesters)
             
             cursor = conn.cursor()
             cursor.execute(dataInsertQuery, dataInsertTuple)
             
             conn.commit()
             conn.close()
+            
+            tkinter.messagebox.showinfo(title="Success", message="Successfully registered.")
     else:
         tkinter.messagebox.showwarning(title="Error", message="First name and last name are required.")
 
     
 window = tkinter.Tk()
 window.title("Data Entry")
+window.geometry('500x280')
+window.minsize(500,280)
+window.maxsize(500,280)
 
 frame = tkinter.Frame(window)
 frame.pack()
@@ -58,11 +68,11 @@ lastNameLabel.grid(row=0, column=1)
 LastNameEntry = tkinter.Entry(userInfoFrame)
 LastNameEntry.grid(row=1, column=1)
 
-titleLabel = tkinter.Label(userInfoFrame, text="Title")
-titleLabel.grid(row=0, column=2)
+emailLabel = tkinter.Label(userInfoFrame, text="Email")
+emailLabel.grid(row=0, column=2)
 
-titleCombobox = ttk.Combobox(userInfoFrame, values=["","Teste", "Teste2"])
-titleCombobox.grid(row=1, column=2)
+emailEntry = tkinter.Entry(userInfoFrame)
+emailEntry.grid(row=1, column=2)
 
 ageLabel = tkinter.Label(userInfoFrame, text="Age")
 ageLabel.grid(row=2, column=0)
@@ -84,7 +94,7 @@ coursesFrame = tkinter.LabelFrame(frame, text="Registration Status")
 coursesFrame.grid(row=1, column=0, padx=20, pady=10, sticky="news")
 
 regStatusVar = tkinter.StringVar(value="Not Registered")
-registeredCheck = tkinter.Checkbutton(coursesFrame, text="Currently Registered", variable=regStatusVar, onvalue="Registration", offvalue="Not Registered")
+registeredCheck = tkinter.Checkbutton(coursesFrame, text="Currently Registered", variable=regStatusVar, onvalue="Registered", offvalue="Not Registered")
 registeredCheck.grid(row=1, column=0)
 
 numCoursesLabel = tkinter.Label(coursesFrame, text="Courses")
@@ -103,6 +113,6 @@ for widget in coursesFrame.winfo_children():
     widget.grid_configure(padx=10, pady=2)
     
 #Third Row
-button = tkinter.Button(frame, text="Enter Data", command=enterData)
+button = tkinter.Button(frame, text="Enter Data", bg=tealColor, fg=whiteColor, command=enterData)
 button.grid(row=2, column=0, sticky="news", padx=20, pady=10)
 window.mainloop()
