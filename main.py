@@ -1,4 +1,5 @@
 import tkinter
+import sqlite3
 from tkinter import ttk
 from tkinter import messagebox
 
@@ -16,12 +17,21 @@ def enterData():
     numSemesters = numSemestersSpinbox.get()
     
     if firstName and lastName:
-            print("------------------------------------------")
-            print("First name: ", firstName, "Last name: ", lastName)
-            print("Title: ", title, "Age: ", age, "Nationality: ", nationality)
-            print("Courses: ", numCourses, "Semesters: ", numSemesters)
-            print("Registration status: ", registrationStatus)
-            print("------------------------------------------")
+            #Database
+            conn = sqlite3.connect('data.db')
+            
+            tableCreateQuery = '''CREATE TABLE IF NOT EXISTS Student_Data(firstname TEXT, lastname TEXT, title TEXT, age INT, nationality TEXT, registration_status TEXT, num_courses INT, num_semesters INT)'''
+            
+            conn.execute(tableCreateQuery)
+            
+            dataInsertQuery = '''INSERT INTO Student_Data(firstname, lastname, title, age, nationality, registration_status, num_courses, num_semesters) VALUES (?,?,?,?,?,?,?,?)'''
+            dataInsertTuple = (firstName, lastName, title, age, nationality, registrationStatus, numCourses, numSemesters)
+            
+            cursor = conn.cursor()
+            cursor.execute(dataInsertQuery, dataInsertTuple)
+            
+            conn.commit()
+            conn.close()
     else:
         tkinter.messagebox.showwarning(title="Error", message="First name and last name are required.")
 
