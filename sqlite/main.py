@@ -18,23 +18,25 @@ def enterData():
     numSemesters = numSemestersSpinbox.get()
 
     if firstName and lastName:
-            #Database
-            conn = sqlite3.connect('data.db')
-            
-            tableCreateQuery = '''CREATE TABLE IF NOT EXISTS Student_Data(firstname TEXT, lastname TEXT, email TEXT, age INT, nationality TEXT, registration_status TEXT, num_courses INT, num_semesters INT)'''
-            
-            conn.execute(tableCreateQuery)
-            
-            dataInsertQuery = '''INSERT INTO Student_Data(firstname, lastname, email, age, nationality, registration_status, num_courses, num_semesters) VALUES (?,?,?,?,?,?,?,?)'''
-            dataInsertTuple = (firstName, lastName, email, age, nationality, registrationStatus, numCourses, numSemesters)
-            
-            cursor = conn.cursor()
-            cursor.execute(dataInsertQuery, dataInsertTuple)
-            
-            conn.commit()
-            conn.close()
-            
-            tkinter.messagebox.showinfo(title="Success", message="Successfully registered.")
+        # Database
+        conn = sqlite3.connect('data.db')
+
+        tableCreateQuery = '''CREATE TABLE IF NOT EXISTS Student_Data(firstname TEXT, lastname TEXT, email TEXT, age INT, nationality TEXT, registration_status TEXT, num_courses INT, num_semesters INT)'''
+
+        conn.execute(tableCreateQuery)
+
+        dataInsertQuery = '''INSERT INTO Student_Data(firstname, lastname, email, age, nationality, registration_status, num_courses, num_semesters) VALUES (?,?,?,?,?,?,?,?)'''
+        dataInsertTuple = (firstName, lastName, email, age, nationality,
+                           registrationStatus, numCourses, numSemesters)
+
+        cursor = conn.cursor()
+        cursor.execute(dataInsertQuery, dataInsertTuple)
+
+        conn.commit()
+        conn.close()
+
+        tkinter.messagebox.showinfo(
+            title="Success", message="Successfully registered.")
     else:
         tkinter.messagebox.showwarning(
             title="Error", message="First name and last name are required.")
@@ -43,8 +45,8 @@ def enterData():
 window = tkinter.Tk()
 window.title("Data Entry")
 window.geometry("580x350")
-window.minsize(580,350)
-window.maxsize(580,350)
+window.minsize(580, 350)
+window.maxsize(580, 350)
 
 window.tk.call("source", "azure.tcl")
 window.tk.call("set_theme", "dark")

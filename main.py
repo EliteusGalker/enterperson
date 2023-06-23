@@ -34,8 +34,8 @@ def enterData():
 window = tkinter.Tk()
 window.title("Data Entry")
 window.geometry("580x350")
-window.minsize(580,350)
-window.maxsize(580,350)
+window.minsize(580, 350)
+window.maxsize(580, 350)
 
 window.tk.call("source", "azure.tcl")
 window.tk.call("set_theme", "dark")

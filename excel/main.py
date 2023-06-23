@@ -19,22 +19,25 @@ def enterData():
     numSemesters = numSemestersSpinbox.get()
 
     if firstName and lastName:
-        filepath = "C:\Excel\data.xlsx" #Custom filepath
-        
+        filepath = "C:\Excel\data.xlsx"  # Custom filepath
+
         if not os.path.exists(filepath):
             workbook = openpyxl.Workbook()
             sheet = workbook.active
-            heading = ["First Name", "Last Name", "Email", "Age", "Nationality", "Courses", "Semesters", "Registration Status"]
+            heading = ["First Name", "Last Name", "Email", "Age",
+                       "Nationality", "Courses", "Semesters", "Registration Status"]
             sheet.append(heading)
             workbook.save(filepath)
-            
+
         workbook = openpyxl.load_workbook(filepath)
         sheet = workbook.active
-        sheet.append([firstName, lastName, email, age, nationality, numCourses, numSemesters, registrationStatus])
+        sheet.append([firstName, lastName, email, age, nationality,
+                     numCourses, numSemesters, registrationStatus])
         workbook.save(filepath)
-        
-        tkinter.messagebox.showinfo(title="Success", message="Successfully registered.")
-        
+
+        tkinter.messagebox.showinfo(
+            title="Success", message="Successfully registered.")
+
     else:
         tkinter.messagebox.showwarning(
             title="Error", message="First name and last name are required.")
@@ -43,8 +46,8 @@ def enterData():
 window = tkinter.Tk()
 window.title("Data Entry")
 window.geometry("580x350")
-window.minsize(580,350)
-window.maxsize(580,350)
+window.minsize(580, 350)
+window.maxsize(580, 350)
 
 window.tk.call("source", "azure.tcl")
 window.tk.call("set_theme", "dark")
