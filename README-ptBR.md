@@ -1,22 +1,22 @@
 # Python Data Entry
 
-Project accomplished based on data entry in Database and Excel using Tkinter for GUI.
+Projeto realizado com base em entrada de dados em Banco de dados e Excel utilizando Tkinter para GUI.
 
-## Functionalities
+## Funcionalidades
 
-- Database
+- Banco de Dados
 - Excel
-- Graphic user interface
+- Graphical User Interface
 
-## Demonstration
+## Demonstração
 
-Insert a gif or a link to a demo
+Insira um gif ou um link de alguma demonstração
 
-## Documentation
+## Documentação
 
 [Python](https://www.python.org)
 
 [Tkinter](https://docs.python.org/3/library/tkinter.html)
 
-[Tkinter theme](https://github.com/rdbende/Azure-ttk-theme)
+[Tkinter Theme](https://github.com/rdbende/Azure-ttk-theme)
 
