@@ -2,19 +2,20 @@ import tkinter
 from tkinter import ttk
 from tkinter import messagebox
 
+
 def enterData():
-    #User Info
+    # User Info
     firstName = firstNameEntry.get()
     lastName = LastNameEntry.get()
     email = emailEntry.get()
     age = ageSpinbox.get()
     nationality = nationalityCombobox.get()
-    
-    #Course Info
+
+    # Course Info
     registrationStatus = regStatusVar.get()
     numCourses = numCourseSpinbox.get()
     numSemesters = numSemestersSpinbox.get()
-    
+
     if firstName and lastName:
         print("------------------------------------------")
         print("First name: ", firstName, "Last name: ", lastName)
@@ -22,14 +23,19 @@ def enterData():
         print("Courses: ", numCourses, "Semesters: ", numSemesters)
         print("Registration status: ", registrationStatus)
         print("------------------------------------------")
-        
-        tkinter.messagebox.showinfo(title="Success", message="Successfully registered.")
-    else:
-        tkinter.messagebox.showwarning(title="Error", message="First name and last name are required.")
 
-    
+        tkinter.messagebox.showinfo(
+            title="Success", message="Successfully registered.")
+    else:
+        tkinter.messagebox.showwarning(
+            title="Error", message="First name and last name are required.")
+
+
 window = tkinter.Tk()
 window.title("Data Entry")
+window.geometry("580x350")
+window.minsize(580,350)
+window.maxsize(580,350)
 
 window.tk.call("source", "azure.tcl")
 window.tk.call("set_theme", "dark")
@@ -37,9 +43,9 @@ window.tk.call("set_theme", "dark")
 frame = tkinter.Frame(window)
 frame.pack()
 
-#First Row
+# First Row
 userInfoFrame = ttk.LabelFrame(frame, text="User Information")
-userInfoFrame.grid(row=0, column=0,padx=20, pady=10)
+userInfoFrame.grid(row=0, column=0, padx=20, pady=10)
 
 firstNameLabel = ttk.Label(userInfoFrame, text="First Name")
 firstNameLabel.grid(row=0, column=0)
@@ -63,42 +69,47 @@ ageLabel = ttk.Label(userInfoFrame, text="Age")
 ageLabel.grid(row=2, column=0)
 
 ageSpinbox = ttk.Spinbox(userInfoFrame, from_=18, to=60)
-ageSpinbox.insert(0,"18")
+ageSpinbox.insert(0, "18")
 ageSpinbox.grid(row=3, column=0)
 
 nationalityLabel = ttk.Label(userInfoFrame, text="Nationality")
 nationalityLabel.grid(row=2, column=1)
 
-nationalityCombobox = ttk.Combobox(userInfoFrame, values=["Africa", "Antarctica", "Asia", "Europe", "North America", "Oceania", "South America"])
+nationalityCombobox = ttk.Combobox(userInfoFrame, values=[
+                                   "Africa", "Antarctica", "Asia", "Europe", "North America", "Oceania", "South America"])
 nationalityCombobox.grid(row=3, column=1)
 
 for widget in userInfoFrame.winfo_children():
     widget.grid_configure(padx=10, pady=3)
-    
-#Second Row
+
+# Second Row
 coursesFrame = ttk.LabelFrame(frame, text="Registration Status")
 coursesFrame.grid(row=1, column=0, padx=20, pady=10, sticky="news")
 
 regStatusVar = tkinter.StringVar(value="Not Registered")
-registeredCheck = ttk.Checkbutton(coursesFrame, text="Currently Registered", variable=regStatusVar, onvalue="Registered", offvalue="Not Registered")
+registeredCheck = ttk.Checkbutton(coursesFrame, text="Currently Registered",
+                                  variable=regStatusVar, onvalue="Registered", offvalue="Not Registered")
 registeredCheck.grid(row=1, column=0)
 
 numCoursesLabel = ttk.Label(coursesFrame, text="Courses")
 numCoursesLabel.grid(row=0, column=1)
 
 numCourseSpinbox = ttk.Spinbox(coursesFrame, from_="0", to="infinity")
+numCourseSpinbox.insert(0, "0")
 numCourseSpinbox.grid(row=1, column=1)
 
 numSemestersLabel = ttk.Label(coursesFrame, text="Semesters")
 numSemestersLabel.grid(row=0, column=2)
 
 numSemestersSpinbox = ttk.Spinbox(coursesFrame, from_=0, to="infinity")
+numSemestersSpinbox.insert(0, "0")
 numSemestersSpinbox.grid(row=1, column=2)
 
 for widget in coursesFrame.winfo_children():
     widget.grid_configure(padx=10, pady=3)
-    
-#Third Row
+
+# Third Row
 button = ttk.Button(frame, text="Enter Data", command=enterData)
 button.grid(row=2, column=0, sticky="news", padx=20, pady=10)
+
 window.mainloop()
