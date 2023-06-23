@@ -22,6 +22,7 @@ def enterData():
         print("Courses: ", numCourses, "Semesters: ", numSemesters)
         print("Registration status: ", registrationStatus)
         print("------------------------------------------")
+        
         tkinter.messagebox.showinfo(title="Success", message="Successfully registered.")
     else:
         tkinter.messagebox.showwarning(title="Error", message="First name and last name are required.")
