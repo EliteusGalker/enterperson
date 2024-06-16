@@ -5,9 +5,9 @@ from tkinter import messagebox
 
 def enterData():
     # User Info
-    firstName = firstNameEntry.get()
-    lastName = LastNameEntry.get()
-    email = emailEntry.get()
+    firstName = ImięOjcaEntry.get()
+    lastName = ImięDrugieEntry.get()
+    email = nazwiskoEntry.get()
     age = ageSpinbox.get()
     nationality = nationalityCombobox.get()
 
@@ -33,9 +33,9 @@ def enterData():
 
 window = tkinter.Tk()
 window.title("Data Entry")
-window.geometry("580x350")
+window.geometry("580x400")
 window.minsize(580, 350)
-window.maxsize(580, 350)
+
 
 window.tk.call("source", "azure.tcl")
 window.tk.call("set_theme", "dark")
@@ -44,72 +44,117 @@ frame = tkinter.Frame(window)
 frame.pack()
 
 # First Row
-userInfoFrame = ttk.LabelFrame(frame, text="User Information")
+userInfoFrame = ttk.LabelFrame(frame, text="Dane Strony")
 userInfoFrame.grid(row=0, column=0, padx=20, pady=10)
 
-firstNameLabel = ttk.Label(userInfoFrame, text="First Name")
-firstNameLabel.grid(row=0, column=0)
+ImięLabel = ttk.Label(userInfoFrame, text="Imię Pierwsze")
+ImięLabel.grid(row=0, column=0)
 
-firstNameEntry = ttk.Entry(userInfoFrame)
-firstNameEntry.grid(row=1, column=0)
+ImięEntry = ttk.Entry(userInfoFrame)
+ImięEntry.grid(row=1, column=0)
 
-lastNameLabel = ttk.Label(userInfoFrame, text="Last Name")
-lastNameLabel.grid(row=0, column=1)
+ImięDrugieLabel = ttk.Label(userInfoFrame, text="Imię Drugie")
+ImięDrugieLabel.grid(row=0, column=1)
 
-LastNameEntry = ttk.Entry(userInfoFrame)
-LastNameEntry.grid(row=1, column=1)
+ImięDrugieEntry = ttk.Entry(userInfoFrame)
+ImięDrugieEntry.grid(row=1, column=1)
 
-emailLabel = ttk.Label(userInfoFrame, text="Email")
-emailLabel.grid(row=0, column=2)
+nazwiskoLabel = ttk.Label(userInfoFrame, text="Nazwisko")
+nazwiskoLabel.grid(row=0, column=2)
 
-emailEntry = ttk.Entry(userInfoFrame)
-emailEntry.grid(row=1, column=2)
+nazwiskoEntry = ttk.Entry(userInfoFrame)
+nazwiskoEntry.grid(row=1, column=2)
 
-ageLabel = ttk.Label(userInfoFrame, text="Age")
-ageLabel.grid(row=2, column=0)
 
-ageSpinbox = ttk.Spinbox(userInfoFrame, from_=18, to=60)
-ageSpinbox.insert(0, "18")
-ageSpinbox.grid(row=3, column=0)
+ImięOjcaLabel = ttk.Label(userInfoFrame, text="Imię Ojca")
+ImięOjcaLabel.grid(row=2, column=0)
 
-nationalityLabel = ttk.Label(userInfoFrame, text="Nationality")
-nationalityLabel.grid(row=2, column=1)
+ImięOjcaEntry = ttk.Entry(userInfoFrame)
+ImięOjcaEntry.grid(row=3, column=0)
 
-nationalityCombobox = ttk.Combobox(userInfoFrame, values=[
-                                   "Africa", "Antarctica", "Asia", "Europe", "North America", "Oceania", "South America"])
-nationalityCombobox.grid(row=3, column=1)
+ImięMatkiLabel = ttk.Label(userInfoFrame, text="Imię Matki")
+ImięMatkiLabel.grid(row=2, column=1)
+
+ImięMatkiEntry = ttk.Entry(userInfoFrame)
+ImięMatkiEntry.grid(row=3, column=1)
+
+PESELLabel = ttk.Label(userInfoFrame, text="PESEL")
+PESELLabel.grid(row=2, column=2)
+
+PESELEntry = ttk.Entry(userInfoFrame)
+PESELEntry.grid(row=3, column=2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+dokumentRodzajLabel = ttk.Label(userInfoFrame, text="Dokument Tożsamości")
+dokumentRodzajLabel.grid(row=4, column=0)
+
+dokumentRodzajCombobox = ttk.Combobox(userInfoFrame, values=[
+                                   "Dowód Osobisty", "Paszport"])
+dokumentRodzajCombobox.grid(row=5, column=0)
+
+nrDokumentuLabel = ttk.Label(userInfoFrame, text="Numer Dokumentu")
+nrDokumentuLabel.grid(row=4, column=1)
+
+nrDokumentuEntry = ttk.Entry(userInfoFrame)
+nrDokumentuEntry.grid(row=5, column=1)
+
+adresLabel = ttk.Label(userInfoFrame, text="Adres")
+adresLabel.grid(row=4, column=2)
+
+adresEntry = ttk.Entry(userInfoFrame)
+adresEntry.grid(row=5, column=2)
 
 for widget in userInfoFrame.winfo_children():
     widget.grid_configure(padx=10, pady=3)
 
 # Second Row
-coursesFrame = ttk.LabelFrame(frame, text="Registration Status")
+coursesFrame = ttk.LabelFrame(frame, text="Charakter Udziału")
 coursesFrame.grid(row=1, column=0, padx=20, pady=10, sticky="news")
 
-regStatusVar = tkinter.StringVar(value="Not Registered")
-registeredCheck = ttk.Checkbutton(coursesFrame, text="Currently Registered",
-                                  variable=regStatusVar, onvalue="Registered", offvalue="Not Registered")
-registeredCheck.grid(row=1, column=0)
+#obywatelstwoVar = tkinter.StringVar(value="Obywatel PL")
+#obywatelstwoCheck = ttk.Checkbutton(coursesFrame, text="Obywatel Polski",
+                                  #variable=obywatelstwoVar, onvalue="Obywatel PL", offvalue="Nie Obywatel PL")
+#obywatelstwoCheck.grid(row=1, column=0)
 
-numCoursesLabel = ttk.Label(coursesFrame, text="Courses")
-numCoursesLabel.grid(row=0, column=1)
+udziałLicznikLabel = ttk.Label(coursesFrame, text="Udział Licznik")
+udziałLicznikLabel.grid(row=0, column=0)
 
-numCourseSpinbox = ttk.Spinbox(coursesFrame, from_="0", to="infinity")
-numCourseSpinbox.insert(0, "0")
-numCourseSpinbox.grid(row=1, column=1)
+udziałLicznikSpinbox = ttk.Spinbox(coursesFrame, from_="0", to="infinity")
+udziałLicznikSpinbox.insert(0, "0")
+udziałLicznikSpinbox.grid(row=1, column=0)
 
-numSemestersLabel = ttk.Label(coursesFrame, text="Semesters")
-numSemestersLabel.grid(row=0, column=2)
+udziałMianownikLabel = ttk.Label(coursesFrame, text="Udział Mianownik")
+udziałMianownikLabel.grid(row=0, column=1)
 
-numSemestersSpinbox = ttk.Spinbox(coursesFrame, from_=0, to="infinity")
-numSemestersSpinbox.insert(0, "0")
-numSemestersSpinbox.grid(row=1, column=2)
+udziałMianownikSpinbox = ttk.Spinbox(coursesFrame, from_=0, to="infinity")
+udziałMianownikSpinbox.insert(0, "0")
+udziałMianownikSpinbox.grid(row=1, column=1)
+
+rodzajUdziałuLabel = ttk.Label(coursesFrame, text="Rodzaj Udziału")
+rodzajUdziałuLabel.grid(row=0, column=2)
+
+rodzajUdziałuCombobox = ttk.Combobox(coursesFrame, values=[
+                                   "Zwykły", "Wspólność Małżeńśka",])
+rodzajUdziałuCombobox.grid(row=1, column=2)
 
 for widget in coursesFrame.winfo_children():
     widget.grid_configure(padx=10, pady=3)
 
 # Third Row
-button = ttk.Button(frame, text="Enter Data", command=enterData)
-button.grid(row=2, column=0, sticky="news", padx=20, pady=10)
+button = ttk.Button(frame, text="Dodaj Stronę", command=enterData)
+button.grid(row=3, column=0, sticky="news", padx=20, pady=10)
 
 window.mainloop()
